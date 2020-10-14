@@ -2,11 +2,11 @@ import numpy as np
 import matplotlib.pyplot as plot
 import math
 
-fittingPoints = 4
+fittingPoints = 100
 interval = [-1, 1]
 lambdas = []
 xVals = []
-x = np.linspace(interval[0], interval[1])
+x = np.linspace(interval[0], interval[1], 1000)
 
 def getXVals(n):
     dif = interval[1] - interval[0]
@@ -15,7 +15,7 @@ def getXVals(n):
         #print(xVals[i])
 
 def funct(xVal):
-    return np.exp(np.power(xVal * -1, 2.))
+    return np.power(1 + 25 * np.power(xVal, 2), -1)
 
 def getLambdas(n):
     for i in range(0, n):
@@ -38,13 +38,13 @@ p = getBarycentric(fittingPoints)
 
 
 f_plot, = plot.plot(x, funct(x), color="black", label="f(x)")
-p_plot, = plot.plot(x, p, color="blue", label="$P_{3}(x)$")
+p_plot, = plot.plot(x, p, color="blue", label="$P_{99}(x)$")
 plot.xlabel("x")
 plot.ylabel("y")
-plot.title("Lagrange Barycentric Approximation of the Gaussian Function")
+plot.title("Lagrange Barycentric Approximation of the Runge Function")
 plot.legend(handles = [f_plot, p_plot])
 plot.show()
-""" Error plot
+"""
 error_plot, = plot.plot(x, funct(x) - p, label="Error")
 plot.xlabel("x")
 plot.ylabel("y")
